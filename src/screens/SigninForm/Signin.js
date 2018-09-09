@@ -8,7 +8,7 @@ class SignIn extends Component {
 
 
     render() {
-        const { email, password, fieldChange,onSubmit } = this.props;
+        const { email, password, fieldChange, onSubmit } = this.props;
         return (
             <div className="container text-center" >
                 <form onSubmit={onSubmit}>
@@ -16,6 +16,7 @@ class SignIn extends Component {
                         <label>
                             Email:
                             <input
+                                required
                                 name="email"
                                 type="email"
                                 value={email}
@@ -28,6 +29,7 @@ class SignIn extends Component {
                         <label>
                             Password:
                             <input
+                                required
                                 name="password"
                                 onChange={fieldChange}
                                 value={password}

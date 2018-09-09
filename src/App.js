@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactHeader from './component/ReactHeader';
 import SignIn from './screens/SigninForm/Signin';
 import SignUp from './screens/SignUpForm/Signup';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import swal from 'sweetalert';
 
 class App extends Component {
     constructor() {
@@ -10,7 +11,7 @@ class App extends Component {
         this.state = {
             signup: false,
             login: false,
-            userList: JSON.parse(localStorage.getItem('userList')),
+            userList: JSON.parse(localStorage.getItem('userList')) || [],
             email: '',
             password: ''
         }
@@ -25,10 +26,22 @@ class App extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
     checkLogin(e) {
+        const { userList, email, password } = this.state;
         e.preventDefault();
-        console.log('Checking from main screen');
-        
-        
+        const user = userList.map(user => {
+            if (user.email === email && user.password === password) {
+                return user
+            }
+        })
+        if (user.length === 0) {
+            swal({
+                title: "User Name Or Password Is Not Correct!",
+                icon: "warning",
+            });
+        }
+        console.log(user);
+
+
     }
 
 
@@ -45,7 +58,13 @@ class App extends Component {
         return (
             <div className="App">
                 <ReactHeader />
-                {!signup ? <SignIn signup={this.signupPage} onSubmit={this.checkLogin} fieldChange={this.fieldChange} email={email} password={password} />
+                {!signup ?
+                    <SignIn
+                        signup={this.signupPage}
+                        onSubmit={this.checkLogin}
+                        fieldChange={this.fieldChange}
+                        email={email} password={password}
+                    />
                     : <SignUp signup={this.signupPage} />}
             </div>
         );
