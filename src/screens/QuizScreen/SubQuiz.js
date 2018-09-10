@@ -8,7 +8,8 @@ class SubQuiz extends Component {
         this.state = {
             startQuiz: '',
             currentIndex: '',
-            subQuiz: []
+            subQuiz: [],
+            allUsers: JSON.parse(localStorage.getItem("userList"))
         }
         this.startQuiz = this.startQuiz.bind(this);
         this.showMarks = this.showMarks.bind(this);
@@ -33,20 +34,26 @@ class SubQuiz extends Component {
         this.setState({ startQuiz: '', subQuiz })
     }
 
-    totalMarks(index){
-        const {subQuiz} = this.state;
-        console.log(index);
-        let marks = 0,totalMarks = 0;
+    totalMarks(index) {
+        const { subQuiz, allUsers } = this.state;
+        const { quizIndex, user, userNumber } = this.props;
+        console.log();
+        let marks = 0, totalMarks = 0;
         console.log(subQuiz);
-        subQuiz.Quiz[index].map( question => {
-            if(question.correctAnswer ==question.givinAnswer ){
-                marks +=10;
+        subQuiz.Quiz[index].map(question => {
+            if (question.correctAnswer == question.givinAnswer) {
+                marks += 10;
             }
             totalMarks += 10
         })
-        return(
+        allUsers[userNumber].QuizData[quizIndex].Quiz[index] = subQuiz.Quiz[index]
+        localStorage.setItem('userList',JSON.stringify(allUsers))
+        console.log(
+            allUsers
+        );
+        return (
             <div>
-                Total Marks : {totalMarks}<br/>
+                Total Marks : {totalMarks}<br />
                 Obtain Marks : {marks}
             </div>
         )
@@ -59,7 +66,7 @@ class SubQuiz extends Component {
                 <ol>
                     {subQuiz.Quiz.map((quiz, index) => {
                         return (
-                            !quiz.time ? <li key={index+12}>{this.totalMarks(index)}</li> :
+                            !quiz.time ? <li key={index + 12}>{this.totalMarks(index)}</li> :
                                 <li key={quiz.time + index}>
                                     <div>
                                         Quiz:{index + 1}
@@ -79,8 +86,10 @@ class SubQuiz extends Component {
         )
     }
     render() {
-        const { mainQuiz } = this.props;
-        const { startQuiz, subQuiz } = this.state;
+        const { mainQuiz, quizIndex, user, userNumber } = this.props;
+        console.log(quizIndex, userNumber, user);
+        const { startQuiz, subQuiz, allUsers } = this.state;
+        console.log(allUsers);
         return (
             <div className="container-fluid">
                 <div>

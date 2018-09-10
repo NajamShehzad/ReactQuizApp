@@ -5,6 +5,7 @@ import SignUp from './screens/SignUpForm/Signup';
 import QuizHeader from './screens/Header/Header';
 import QuizMain from './screens/QuizScreen/QuizMain';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 import swal from 'sweetalert';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         this.state = {
             signup: false,
             user: '',
+            userNumber: '',
             userList: JSON.parse(localStorage.getItem('userList')) || [],
             email: '',
             password: ''
@@ -21,6 +23,7 @@ class App extends Component {
         this.fieldChange = this.fieldChange.bind(this);
         this.checkLogin = this.checkLogin.bind(this);
         this.updateList = this.updateList.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
 
@@ -39,16 +42,17 @@ class App extends Component {
     checkLogin(e) {
         e.preventDefault();
         const { userList, email, password } = this.state;
-        let user;
+        let user, userNumber;
         for (let i = 0; i < userList.length; i++) {
             if (email === userList[i].email && password === userList[i].password) {
                 console.log("Match Found");
                 user = userList[i];
+                userNumber = i;
                 break;
             }
         }
         if (user) {
-            this.setState({ user })
+            this.setState({ user, userNumber })
         }
         else {
             swal({
@@ -60,8 +64,21 @@ class App extends Component {
 
 
     }
-
-
+    logout() {
+        this.setState({
+            user: ''
+        })
+    }
+    logoutButton() {
+        return (
+            <div>
+                <h3>
+                    {this.state.user.userName}
+                </h3>
+                <button onClick={this.logout} style={{ float: "right" }} className="btn btn-primary"><i className="fa fa-sign-out"></i> Logout</button>
+            </div>
+        )
+    }
 
 
 
@@ -71,14 +88,17 @@ class App extends Component {
 
 
     render() {
-        const { signup, email, password, user } = this.state;
+        const { signup, email, password, user, userNumber } = this.state;
         return (
             <div >
                 <div className="App">
                     <ReactHeader />
-                    <QuizHeader />
+                    <div>
+                        <QuizHeader />
+                        {user && this.logoutButton()}
+                    </div>
                 </div>
-                {user ? <div><QuizMain /></div> :
+                {user ? <div><QuizMain user={user} userNumber={userNumber} /></div> :
                     <div>
                         {!signup ?
                             <SignIn

@@ -12,11 +12,11 @@ const QuizData = [{
             },{
                 question: 'What is Your Middle Name',
                 options: ["mutlib", 'Shehzad', 'Butt'],
-                correctAnswer: 0
+                correctAnswer: 1
             },{
                 question: 'What is Your Last Name',
                 options: ["Najam", 'Butt', 'rehman'],
-                correctAnswer: 0
+                correctAnswer: 1
             }]
         },
         {

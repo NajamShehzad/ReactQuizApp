@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Signup.css';
+import QuizData from '../QuizScreen/QuizData';
 import swal from 'sweetalert';
 
 
@@ -37,7 +38,7 @@ class SignUp extends Component {
 
             console.log('working');
 
-            userList.push({ userName, email, password });
+            userList.push({ userName, email, password, QuizData });
 
             localStorage.setItem('userList', JSON.stringify(userList));
 
@@ -66,6 +67,8 @@ class SignUp extends Component {
     }
 
     render() {
+        console.log(QuizData);
+        
         const { email, password, userName } = this.state;
         return (
             <div className="container text-center" >
