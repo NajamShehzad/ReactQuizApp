@@ -34,10 +34,18 @@ class SignUp extends Component {
         console.log(userList);
 
         if (newUser) {
+
             console.log('working');
+
             userList.push({ userName, email, password });
+
             localStorage.setItem('userList', JSON.stringify(userList));
+
             this.setState({ userList, userName: '', email: '', password: '' })
+
+            this.props.updateList(userList);
+
+            this.props.signup(false)
         }
         else {
             swal({
