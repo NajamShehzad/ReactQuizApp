@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactHeader from './component/ReactHeader';
 import SignIn from './screens/SigninForm/Signin';
 import SignUp from './screens/SignUpForm/Signup';
+import QuizHeader from './screens/Header/Header';
+import QuizMain from './screens/QuizScreen/QuizMain';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import swal from 'sweetalert';
 
@@ -73,7 +75,8 @@ class App extends Component {
         return (
             <div className="App">
                 <ReactHeader />
-                {user ? <div>Login User</div> :
+                <QuizHeader />
+                {user ? <div><QuizMain /></div> :
                     <div>
                         {!signup ?
                             <SignIn
