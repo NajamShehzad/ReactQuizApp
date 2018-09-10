@@ -31,8 +31,9 @@ class QuizMain extends Component {
                         return (
                             <li key={quiz.name}>
                                 {quiz.name}
+                                <br/>
                                 <button onClick={() => this.subQuiz(index)}>
-                                    Start Quiz
+                                    Show All Related Quiz
                                 </button>
                             </li>
                         )
