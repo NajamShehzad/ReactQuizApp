@@ -73,9 +73,11 @@ class App extends Component {
     render() {
         const { signup, email, password, user } = this.state;
         return (
-            <div className="App">
-                <ReactHeader />
-                <QuizHeader />
+            <div >
+                <div className="App">
+                    <ReactHeader />
+                    <QuizHeader />
+                </div>
                 {user ? <div><QuizMain /></div> :
                     <div>
                         {!signup ?

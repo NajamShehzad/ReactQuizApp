@@ -6,8 +6,16 @@ const QuizData = [{
             totalQuestions: 10,
             time: 45,
             questions: [{
-                question: 'What is Your Name',
-                options: ["Najam", 'Shehzad', 'Butt'],
+                question: 'What is Your First Name',
+                options: ["Najam", 'Ashar', 'Butt'],
+                correctAnswer: 0
+            },{
+                question: 'What is Your Middle Name',
+                options: ["mutlib", 'Shehzad', 'Butt'],
+                correctAnswer: 0
+            },{
+                question: 'What is Your Last Name',
+                options: ["Najam", 'Butt', 'rehman'],
                 correctAnswer: 0
             }]
         },
