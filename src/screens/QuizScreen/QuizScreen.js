@@ -9,7 +9,9 @@ class QuizScreen extends Component {
         this.state = {
             quizNo: 0,
             givinAnswer: '',
-            allAnswers: []
+            allAnswers: [],
+            quizCode:'123456',
+            startQuiz:false
         }
         this.getValue = this.getValue.bind(this);
         this.submitAnswer = this.submitAnswer.bind(this);
