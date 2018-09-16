@@ -10,8 +10,8 @@ class QuizScreen extends Component {
             quizNo: 0,
             givinAnswer: '',
             allAnswers: [],
-            quizCode:'123456',
-            startQuiz:false
+            quizCode: '123456',
+            startQuiz: false
         }
         this.getValue = this.getValue.bind(this);
         this.submitAnswer = this.submitAnswer.bind(this);
@@ -44,8 +44,7 @@ class QuizScreen extends Component {
         }
 
     }
-
-    render() {
+    renderQuiz() {
         const { startQuiz } = this.props;
         const { quizNo } = this.state;
         const quizQuestion = startQuiz.questions[quizNo];
@@ -73,6 +72,17 @@ class QuizScreen extends Component {
                         Next
                     </button>
                 </div>
+            </div>
+        )
+    }
+
+    render() {
+        const { startQuiz } = this.props;
+        const { quizNo } = this.state;
+        const quizQuestion = startQuiz.questions[quizNo];
+        return (
+            <div>
+                {this.renderQuiz()}
             </div>
         )
     }
